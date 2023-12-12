@@ -3,18 +3,22 @@
 Поход в магазин содержит один список покупок, список покупок содержит несколько продуктов.
 
 ```
+// Содержит в себе список покупок
+// Сделано так, чтобы можно переиспользовать список покупок в разные походы в магаин
 Purchase {
     shoppingList: ShoppingList
 }
 ```
 
 ```
+// Содержит в себе список продуктов с их количеством, которое нужно купить
 ShoppingList {
     products: ProductShoppingPosition[] (реализуется через многие-ко-многим)
 }
 ```
 
 ```
+// Объект одного элемента списка покупок
 ProductShoppingPosition {
     product: Product
     value: number
@@ -22,9 +26,9 @@ ProductShoppingPosition {
 ```
 
 ```
+// Сам продукт
 Product {
     title: string,
-    price: number,
-    
+    price: number
 }
 ```
