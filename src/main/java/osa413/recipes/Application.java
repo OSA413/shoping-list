@@ -1,13 +1,13 @@
-package osa413.shopinglist;
+package osa413.recipes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ShopingListApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ShopingListApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }

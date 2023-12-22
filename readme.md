@@ -1,34 +1,45 @@
-Предметаня область: список покупок
-Есть продукты, есть список покупок, есть поход в магаин
-Поход в магазин содержит один список покупок, список покупок содержит несколько продуктов.
+Предметаня область: книга рецептов
+Пользователь может иметь список как любимых рецептов, так и любимых продуктов.
+Каждый рецепт содержит список продуктов с количеством, время приготовления, сложность и название блюда.
+
 
 ```
-// Содержит в себе список покупок
-// Сделано так, чтобы можно переиспользовать список покупок в разные походы в магаин
-Purchase {
-    shoppingList: ShoppingList
+User {
+    favouriteRecipes: Recipe[]
+    favouriteProducts: Product[]
 }
 ```
 
 ```
-// Содержит в себе список продуктов с их количеством, которое нужно купить
-ShoppingList {
-    products: ProductShoppingPosition[] (реализуется через многие-ко-многим)
+// Рецепт блюда
+Recipe {
+    name: String,
+    dificulty: String,
+    preparationTimeMins: Integer
+    products: RecipePosition[] (реализуется через многие-ко-многим)
+    allergens: Allergens[]
 }
 ```
 
 ```
-// Объект одного элемента списка покупок
-ProductShoppingPosition {
+// Элемент рецепта
+RecipePosition {
     product: Product
     value: number
 }
 ```
 
 ```
-// Сам продукт
+// Продукт
 Product {
     title: string,
     price: number
+    allergents: Allergen[]
+}
+```
+
+```
+Allerget {
+    name: String
 }
 ```

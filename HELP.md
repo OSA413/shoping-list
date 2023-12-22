@@ -1,7 +1,7 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The original package name 'osa413.shoping-list' is invalid and this project uses 'osa413.shopinglist' instead.
+* The original package name 'osa413.shoping-list' is invalid and this project uses 'osa413.recipes' instead.
 
 # Getting Started
 

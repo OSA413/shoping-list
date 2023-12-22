@@ -1,4 +1,4 @@
-package osa413.shopinglist.controller;
+package osa413.recipes.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
