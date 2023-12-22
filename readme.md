@@ -14,7 +14,7 @@ User {
 // Рецепт блюда
 Recipe {
     name: String,
-    dificulty: String,
+    difficulty: String,
     preparationTimeMins: Integer
     products: RecipePosition[] (реализуется через многие-ко-многим)
     allergens: Allergens[]
