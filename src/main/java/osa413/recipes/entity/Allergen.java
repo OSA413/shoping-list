@@ -11,7 +11,6 @@ import lombok.Data;
 public class Allergen {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String name;
-
+    public Long id;
+    public String name;
 }

@@ -1,9 +1,6 @@
 package osa413.recipes.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -11,14 +8,13 @@ import lombok.Data;
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String name;
+    public Long id;
+    public String name;
 
-    private String difficulty;
+    public String difficulty;
 
-    private Integer preparationTimeMins;
+    public Integer preparationTimeMins;
 
-    private Product[] products;
-
-    private Allergen[] allergens;
+    @ManyToMany
+    public Product[] products;
 }

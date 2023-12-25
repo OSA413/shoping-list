@@ -1,15 +1,18 @@
 package osa413.recipes.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.io.Serializable;
 
 @Data
 @Entity
+@IdClass(RecipePositionId.class)
 public class RecipePosition {
-    private Double amount;
 
-    private Product product;
+    @Id
+    public Double amount;
+
+    @Id
+    public Long productId;
 }
