@@ -1,5 +1,6 @@
 package osa413.recipes.controller;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,13 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import osa413.recipes.dto.AllergenDTO;
 import osa413.recipes.entity.User;
 import osa413.recipes.repository.UserRepository;
 
 import java.util.Optional;
 
 @Slf4j
-@Controller
+@RestController
 @RequestMapping("users/")
 @RequiredArgsConstructor
 public class UserController {
@@ -22,27 +24,25 @@ public class UserController {
     private final UserRepository repo;
 
     @GetMapping
-    public String index(Model model, Integer pageNumber) {
-        if (pageNumber == null) pageNumber = 0;
-        model.addAttribute("list",  repo.findAll(PageRequest.of(pageNumber,10)));
-        return "genres";
+    public String index() {
+        var a = repo.findAll();
+        return a.toString();
     }
 
     @PostMapping()
-    public String add(BindingResult result, Model model) {
-        if (result.hasErrors()) return "Not OK";
+    public String add() {
         repo.save(new User());
         return "OK";
     }
 
     @GetMapping("{id}")
     public String edit(@PathVariable Long id, Model model) {
-        Optional<User> user = repo.findById(id);
-        return "OK";
+        var entity = repo.findById(id);
+        return entity.toString();
     }
 
-    @DeleteMapping
-    public String remove(@Positive Long id) {
+    @DeleteMapping("{id}")
+    public String remove(@Positive @PathVariable Long id) {
         repo.deleteById(id);
         return "OK";
     }

@@ -3,6 +3,8 @@ package osa413.recipes.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 public class Product {
@@ -12,4 +14,7 @@ public class Product {
     public String name;
 
     public Double price;
+
+    @ManyToMany
+    public List<Product> allergens;
 }

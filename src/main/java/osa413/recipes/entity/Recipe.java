@@ -3,6 +3,8 @@ package osa413.recipes.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 public class Recipe {
@@ -16,5 +18,5 @@ public class Recipe {
     public Integer preparationTimeMins;
 
     @ManyToMany
-    public Product[] products;
+    public List<Product> products;
 }

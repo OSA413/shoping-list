@@ -3,6 +3,8 @@ package osa413.recipes.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 public class User {
@@ -11,11 +13,11 @@ public class User {
     private Long id;
 
     @ManyToMany
-    private Recipe[] favoriteRecipes;
+    private List<Recipe> favoriteRecipes;
 
     @ManyToMany
-    private Product[] favoriteProduct;
+    private List<Product> favoriteProduct;
 
     @ManyToMany
-    private Allergen[] allergens;
+    private List<Allergen> allergens;
 }
