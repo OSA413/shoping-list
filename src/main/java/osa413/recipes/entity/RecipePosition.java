@@ -7,12 +7,21 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@IdClass(RecipePositionId.class)
 public class RecipePosition {
 
     @Id
+    public Long id;
+
     public Double amount;
 
-    @Id
-    public Long productId;
+    @ManyToMany
+    public Product product;
+
+    public RecipePosition(Double amount, Product product) {
+        this.amount = amount;
+        this.product = product;
+    }
+
+    public RecipePosition() {
+    }
 }

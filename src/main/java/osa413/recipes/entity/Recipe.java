@@ -18,5 +18,5 @@ public class Recipe {
     public Integer preparationTimeMins;
 
     @ManyToMany
-    public List<Product> products;
+    public List<RecipePosition> positions;
 }

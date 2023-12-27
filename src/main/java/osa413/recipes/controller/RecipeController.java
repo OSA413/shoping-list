@@ -10,8 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import osa413.recipes.dto.AllergenDTO;
+import osa413.recipes.dto.AppendDTO;
 import osa413.recipes.dto.RecipeDTO;
+import osa413.recipes.dto.RecipePositionDTO;
 import osa413.recipes.entity.Recipe;
+import osa413.recipes.entity.RecipePosition;
+import osa413.recipes.repository.ProductRepository;
+import osa413.recipes.repository.RecipePositionRepository;
 import osa413.recipes.repository.RecipeRepository;
 
 import java.util.Optional;
@@ -23,6 +28,8 @@ import java.util.Optional;
 public class RecipeController {
 
     private final RecipeRepository repo;
+    private final RecipePositionRepository positionRepo;
+    private final ProductRepository productRepo;
 
     @GetMapping
     public String index() {
@@ -53,6 +60,32 @@ public class RecipeController {
     @DeleteMapping("{id}")
     public String remove(@Positive Long id) {
         repo.deleteById(id);
+        return "OK";
+    }
+
+    @PostMapping("{id}/positions")
+    public String addAllergen(
+            @PathVariable Long id,
+            @Valid @RequestBody RecipePositionDTO request,
+            BindingResult result
+    ) {
+        if (result.hasErrors()) return result.getAllErrors().toString();
+        var product = productRepo.findById(request.productId).get();
+        var position = positionRepo.save(new RecipePosition(request.amount, product));
+        var recipe = repo.findById(id).get();
+        recipe.positions.add(position);
+        repo.save(recipe);
+        return "OK";
+    }
+
+    @DeleteMapping("{id}/positions/{positionId}")
+    public String removeAllergen(
+            @PathVariable("id") Long id,
+            @PathVariable("positionId") Long positionId
+    ) {
+        var recipe = repo.findById(id).get();
+        recipe.positions.remove(recipe.positions.stream().filter(x -> x.id == positionId).findFirst().get());
+        repo.save(recipe);
         return "OK";
     }
 }

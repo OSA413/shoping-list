@@ -13,11 +13,11 @@ public class User {
     private Long id;
 
     @ManyToMany
-    private List<Recipe> favoriteRecipes;
+    public List<Recipe> favoriteRecipes;
 
     @ManyToMany
-    private List<Product> favoriteProduct;
+    public List<Product> favoriteProduct;
 
     @ManyToMany
-    private List<Allergen> allergens;
+    public List<Allergen> allergens;
 }

@@ -1,5 +1,6 @@
 package osa413.recipes.dto;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 
 import osa413.recipes.entity.Allergen;
@@ -11,7 +12,7 @@ public class ProductDTO {
     private Long id;
     @NotBlank
     private String name;
-    @NotBlank
+    @PositiveOrZero
     private Double price;
 
 

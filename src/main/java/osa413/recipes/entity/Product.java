@@ -16,5 +16,5 @@ public class Product {
     public Double price;
 
     @ManyToMany
-    public List<Product> allergens;
+    public List<Allergen> allergens;
 }

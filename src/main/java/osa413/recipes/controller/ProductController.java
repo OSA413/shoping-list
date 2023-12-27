@@ -10,9 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import osa413.recipes.dto.AllergenDTO;
+import osa413.recipes.dto.AppendDTO;
 import osa413.recipes.dto.ProductDTO;
 import osa413.recipes.entity.Allergen;
 import osa413.recipes.entity.Product;
+import osa413.recipes.repository.AllergenRepository;
 import osa413.recipes.repository.ProductRepository;
 
 import java.util.Optional;
@@ -24,6 +26,7 @@ import java.util.Optional;
 public class ProductController {
 
     private final ProductRepository repo;
+    private final AllergenRepository allergenRepo;
 
     @GetMapping
     public String index() {
@@ -54,6 +57,31 @@ public class ProductController {
     @DeleteMapping("{id}")
     public String remove(@Positive @PathVariable Long id) {
         repo.deleteById(id);
+        return "OK";
+    }
+
+    @PostMapping("{id}/allergens")
+    public String addAllergen(
+            @PathVariable Long id,
+            @Valid @RequestBody AppendDTO request,
+            BindingResult result
+    ) {
+        if (result.hasErrors()) return result.getAllErrors().toString();
+        var allergen = allergenRepo.findById(request.id).get();
+        var product = repo.findById(id).get();
+        product.allergens.add(allergen);
+        repo.save(product);
+        return "OK";
+    }
+
+    @DeleteMapping("{id}/allergens/{allergenId}")
+    public String removeAllergen(
+            @PathVariable("id") Long id,
+            @PathVariable("allergenId") Long allergenId
+    ) {
+        var product = repo.findById(id).get();
+        product.allergens.remove(product.allergens.stream().filter(x -> x.id == allergenId).findFirst().get());
+        repo.save(product);
         return "OK";
     }
 }
