@@ -20,6 +20,7 @@ import osa413.recipes.repository.RecipePositionRepository;
 import osa413.recipes.repository.RecipeRepository;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -61,6 +62,12 @@ public class RecipeController {
     public String remove(@Positive Long id) {
         repo.deleteById(id);
         return "OK";
+    }
+
+    @GetMapping("{id}/allergens")
+    public String getAllergens(@PathVariable Long id) {
+        var recipe = repo.findById(id).get();
+        return recipe.positions.stream().flatMap(x -> x.product.allergens.stream()).toList().toString();
     }
 
     @PostMapping("{id}/positions")

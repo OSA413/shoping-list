@@ -10,11 +10,12 @@ import java.io.Serializable;
 public class RecipePosition {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
 
     public Double amount;
 
-    @ManyToMany
+    @ManyToOne
     public Product product;
 
     public RecipePosition(Double amount, Product product) {
